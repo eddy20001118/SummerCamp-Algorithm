@@ -1,3 +1,6 @@
 .DS_Store
 *~
 build/*
+.vscode
+.flow_solver.c.swp
+.~lock.map.xlsx#
