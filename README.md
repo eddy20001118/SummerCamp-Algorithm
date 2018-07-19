@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 flow_solver
 ===========
 
@@ -67,3 +68,6 @@ newline.
 
 
 
+=======
+# SummerCamp-Algorithm
+>>>>>>> 51c8515102780b62c2741254decb5c2cea8799fa
