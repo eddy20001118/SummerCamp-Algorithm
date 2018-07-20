@@ -592,9 +592,6 @@ to prevent them.
 ######################################################################
 
 def show_solution(options, colors, decoded):
-    f11 = open("/home/dji/SummerCamp-Algorithm (复件)/solution.txt",mode="w")
-    
-
     '''Print the puzzle solution to the terminal.'''
 
     # make an array to flip the key/value in the colors dict so we can
@@ -635,17 +632,14 @@ def show_solution(options, colors, decoded):
                 
 
             sys.stdout.write(display_char)
-            f11.write(display_char)
-            #sys.stdout.write("yes1")
+            
 
         if options.display_color:
             sys.stdout.write(ANSI_RESET)
-            f11.write(ANSI_RESET)
-            #sys.stdout.write("yes2")
+            
 
         sys.stdout.write('\n')
-        f11.write("\n")
-
+        
 ######################################################################
 
 def solve_sat(options, puzzle, colors, color_var, dir_vars, clauses):
