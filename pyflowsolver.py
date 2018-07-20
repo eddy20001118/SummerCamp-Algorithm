@@ -23,7 +23,6 @@ LEFT = 1
 RIGHT = 2
 TOP = 4
 BOTTOM = 8
-
 DELTAS = [(LEFT, 0, -1),
           (RIGHT, 0, 1),
           (TOP, -1, 0),
@@ -209,15 +208,18 @@ indices.
     # check parity
     for char, color in colors.iteritems():
         if not color_count[color]:
+            """
             print 'color {} has start but no end!'.format(char)
+            """
             return None, None
 
     # print info
     if not options.quiet:
+        """
         print 'read {}x{} puzzle with {} colors from {}'.format(
             size, size, len(colors), filename)
         print
-
+        """
     puzzle, colors = repair_colors(puzzle, colors)
     return puzzle, colors
 
@@ -404,6 +406,7 @@ possibly negated.
     reduce_time = (datetime.now() - start).total_seconds()
 
     if not options.quiet:
+        '''
         print 'generated {:,} clauses over {:,} color variables'.format(
             len(color_clauses), num_color_vars, grouping=True)
 
@@ -414,6 +417,7 @@ possibly negated.
             len(clauses), num_vars)
 
         print 'reduced to SAT in {:.3f} seconds'.format(reduce_time)
+        '''
         print
 
     return color_var, dir_vars, num_vars, clauses, reduce_time
@@ -588,6 +592,8 @@ to prevent them.
 ######################################################################
 
 def show_solution(options, colors, decoded):
+    f11 = open("/home/dji/SummerCamp-Algorithm (复件)/solution.txt",mode="w")
+    
 
     '''Print the puzzle solution to the terminal.'''
 
@@ -626,17 +632,24 @@ def show_solution(options, colors, decoded):
                     ansi_code = ANSI_RESET
 
                 sys.stdout.write(ansi_code)
+                
 
             sys.stdout.write(display_char)
+            f11.write(display_char)
+            #sys.stdout.write("yes1")
 
         if options.display_color:
             sys.stdout.write(ANSI_RESET)
+            f11.write(ANSI_RESET)
+            #sys.stdout.write("yes2")
 
         sys.stdout.write('\n')
+        f11.write("\n")
 
 ######################################################################
 
 def solve_sat(options, puzzle, colors, color_var, dir_vars, clauses):
+    
 
     '''Solve the SAT now that it has been reduced to a list of clauses in
 CNF.  This is an iterative process: first we try to solve a SAT, then
@@ -678,23 +691,35 @@ needed.
     if not options.quiet:
         if options.display_cycles:
             for cycle_decoded in all_decoded[:-1]:
+                """
                 print 'intermediate solution with cycles:'
+                """
                 print
                 show_solution(options, colors, cycle_decoded)
+                
+
+                """
                 print
+                """
 
         if decoded is None:
+            """
             print 'solver returned {} after {:,} cycle '\
                 'repairs and {:.3f} seconds'.format(
                     str(sol), repairs, solve_time)
+            """
 
         else:
+            """
             print 'obtained solution after {:,} cycle repairs '\
                 'and {:.3f} seconds:'.format(
                     repairs, solve_time)
+            """
             print
             show_solution(options, colors, decoded)
+            """
             print
+            """
 
     return sol, decoded, repairs, solve_time
 
@@ -858,8 +883,10 @@ def pyflow_solver_main():
                 stats[result_char][key] += cur_stats[key]
 
         if not options.quiet:
+            """
             print 'finished in total of {:.3f} seconds'.format(
                 total_time)
+            """
         else:
 
             print '{:>{}s} {} {:9,d} {:9,d} {:12,.3f} '\
@@ -867,6 +894,11 @@ def pyflow_solver_main():
                     filename, max_width, result_char,
                     num_vars, len(clauses), reduce_time,
                     repairs, solve_time, total_time)
+            f11.write('{:>{}s} {} {:9,d} {:9,d} {:12,.3f} '\
+                '{:3d} {:12,.3f} {:12,.3f}'.format(
+                    filename, max_width, result_char,
+                    num_vars, len(clauses), reduce_time,
+                    repairs, solve_time, total_time))
 
 
     print_summary(options, stats)
