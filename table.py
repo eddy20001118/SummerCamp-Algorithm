@@ -65,7 +65,7 @@ for m in range(0,len(comborder)):
     sthTowrite.append(conv(iterr,itery,iterg,iterb))
 
 point3 = []
-#####
+
 for l in range(0,len(comborder)):
     sthw = sthTowrite[l]
     for ll in range (0,16):
@@ -83,11 +83,5 @@ for l in range(0,len(comborder)):
 
 for fff in range(0,len(comborder)):
     writePoint(point3[fff],fff)
-
-
-
-#print(point2)
-#print(len(sthTowrite[0]))
-#writePoint(point1)
 
 
